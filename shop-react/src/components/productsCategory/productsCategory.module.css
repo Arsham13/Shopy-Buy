@@ -1,0 +1,27 @@
+.product_category_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.products_categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    row-gap: 20px;
+}
+.product_category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    filter: none !important;
+    color: var(--primary-text-color);
+}
+.product_category_wrapper h3 {
+    margin-bottom: 20px !important;
+}
+.product_category:hover {
+    color: #222222c4;
+}
+.product_category img {
+    width: 110px;
+    border-radius: 10px;
+}

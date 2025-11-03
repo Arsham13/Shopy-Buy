@@ -1,0 +1,188 @@
+.products {
+    opacity: 1 !important;
+    outline: none !important;
+    width: 100%;
+}
+.shegeft_wrapper {
+    background-color: #f0f0f0;
+    height: 90%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 10px 0px;
+    transition: all 0.2s cubic-bezier(0.77, 0, 0.175, 1);
+    position: relative;
+    border: 8px solid #fff;
+    width: 100% !important;
+    box-shadow: 0 0 15px -10px #b8b8b8;
+}
+
+.shegeft_wrapper:hover {
+    box-shadow: 0 0 20px -7px #b8b8b8;
+    /* scale: 0.995; */
+}
+.shegeft_wrapper:hover .shegeft_product {
+    scale: 1.01;
+}
+.shegeft_product {
+    position: relative;
+    background-color: transparent;
+    display: flex;
+    height: 95%;
+    width: 101%;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.shegeft_baner {
+    font-size: 10px;
+    position: absolute;
+    text-align: center;
+    width: 80px;
+    padding: 2px 0;
+    right: 0px;
+    background-color: var(--primary-second-color);
+    top: 0px;
+    color: #fff;
+    /* border-radius: 0 8px 0 8px; */
+    border-bottom-left-radius: 8px;
+    font-weight: bold;
+    z-index: 10;
+}
+.shegeft_titles img {
+    width: 160px;
+    height: auto !important;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.shegeft_titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-bottom: 30px; */
+}
+.row, .texts {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.shegeft_prices {
+    align-self: flex-end;
+}
+.shegeft_prices b {
+    margin-left: 5px;
+}
+
+.product_title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+}
+
+.product_title p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* مثلا بعد از 3 خط سه نقطه بذاره */
+    overflow: hidden;
+    max-width: 250px;
+}
+
+.product_price {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-text-color);
+}
+
+.product_preprice {
+    font-size: 12px;
+    font-weight: 1000;
+    color: #777;
+    text-decoration: line-through var(--primary-light-text-color);
+}
+
+.toman {
+    margin-left: 13px;
+    font-size: 0.75em;
+    font-weight: bolder;
+}
+.toman::after {
+    content: "ما";
+    position: absolute;
+    margin-right: 0px;
+    margin-top: 5px;
+    font-size: bolder;
+}
+
+.toman::before {
+    content: "ن";
+    position: absolute;
+    margin-right: 9px;
+    margin-top: -3px;
+}
+
+.shegeft_pricesTakhfif {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.row .shegeft_pricesTakhfif{
+    width: fit-content;
+}
+
+.takhfif_num p {
+    color: #fff;
+    font-weight: 400;
+    font-size: 13px;
+    height: fit-content;
+    padding: 5px 8px;
+    border-radius: 99px;
+    background-color: var(--primary-second-color);
+}
+
+@media (max-width: 380px) {
+    .shegeft_pricesTakhfif {
+        flex-direction: column;
+        align-items: start;
+    }
+    .shegeft_titles img {
+        width: 100px;
+    }
+}
+@media (max-width: 830px) {
+    .row{
+        flex-direction: column;
+    }
+
+}
+@media (max-width: 629px) {
+    .row{
+        flex-direction: row;
+    }
+}
+@media (max-width: 640px) {
+    .row{
+        flex-direction: row;
+    }
+}
+@media (max-width: 440px) {
+    .row{
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,137 @@
+.swiper {
+    width: 90vw !important;
+    max-width: 100% !important;
+    height: 400px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    cursor: grab;
+    margin-bottom: 80px;
+}
+.imageSwiper {
+    background: transparent !important;
+    border-radius: 0;
+    padding: 0 !important;
+    margin-bottom: 180px !important;
+    height: auto !important;
+    cursor: auto !important;
+    margin-bottom: 150px;
+    box-shadow: none !important;
+}
+.swiper:active {
+    cursor: grabbing;
+}
+
+.swiper-slide {
+    width: 100%;
+}
+
+.swiper-slide img {
+    object-fit: cover !important;
+    /* border-radius: 15px !important; */
+    user-select: none !important;
+    pointer-events: none !important;
+}
+
+.swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+    background: #ffffff51 !important;
+    /* رنگ دلخواه */
+    opacity: 1 !important;
+    /* همیشه قابل دید */
+    margin: 0 5px !important;
+    /* فاصله */
+    transition: all ease-in-out 0.3s !important;
+    border-radius: 9999px !important;
+    /* دایره‌ای */
+    /* box-shadow: 0 0 2px #4824c9; */
+}
+
+/* دایره فعال */
+.swiper-pagination-bullet-active {
+    width: 13px !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 5px var(--primary-color) !important;
+    /* رنگ دایره فعال */
+}
+
+/* فلش‌ها */
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--primary-color) !important;
+    /* رنگ فلش */
+    width: 40px !important;
+    height: 40px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
+    transition: all ease-in-out 0.3s !important;
+    border-radius: 50% !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 30px !important;
+}
+
+/* فلش ها وقتی هاور میشن */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background: var(--placeholder-color) !important;
+    color: #fff !important;
+}
+
+.stars {
+    width: 25px;
+    height: 25px;
+    right: 5%;
+    bottom: -99%;
+    animation-duration: 3s;
+}
+
+svg linearGradient stop {
+    stop-color: #5900ff !important;
+}
+
+.stars:nth-child(1) {
+    width: 25px;
+    height: 25px;
+    left: 30%;
+    top: -20px;
+    animation-duration: 8s;
+}
+.stars:nth-child(2) {
+    rotate: 90deg;
+    width: 50px;
+    height: 50px;
+    right: inherit;
+    left: 5%;
+    top: 0;
+    animation-duration: 5s;
+}
+
+@media (width <=650px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 20px !important;
+    }
+}
+
+@media (width <= 420px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 0px !important;
+        height: 0px !important;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 0px !important;
+    }
+}

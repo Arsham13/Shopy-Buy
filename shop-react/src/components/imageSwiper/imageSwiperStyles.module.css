@@ -1,0 +1,56 @@
+.image_infos {
+    z-index: 3;
+    gap: 50px;
+    padding: 30px;
+    display: flex;
+    height: 100%;
+}
+.image_infos div {
+    display: flex;
+    flex-direction: column;
+    line-height: 2em;
+    gap: 20px;
+}
+.image_infos img {
+    width: 25%;
+    align-self: center;
+    height: auto;
+}
+.counter {
+    border-radius: 99px;
+    direction: ltr;
+    position: absolute;
+    width: 80px;
+    height: 5px;
+    background-color: var(--shop-cart-backcolor);
+    left: 10%;
+    bottom: 0;
+}
+.counter div {
+    width: 0%;
+    height: 100%;
+    border-radius: 99px;
+    background-color: var(--primary-color);
+    transition: all 11s ease-out;
+}
+
+.swiper_star{
+    width: 35px !important;
+    height: 35px !important;
+}
+
+@media (max-width: 800px) {
+    .image_infos {
+        font-size: 0.9rem;
+        flex-direction: column-reverse;
+    }
+    .image_infos img {
+        width: 175px;
+    }
+    .counter {
+        top: 15%;
+        left: 0;
+        width: 50px;
+        rotate: 90deg;
+    }
+}

@@ -1,0 +1,116 @@
+.all_footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 12em;
+    align-items: center;
+}
+.footer_wrapper {
+    background-color: var(--primary-text-color);
+    height: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+.footer_wrapper img:first-child,
+.stars {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(0deg)
+        brightness(120%) contrast(100%);
+    width: 250px;
+}
+.footer_wrapper a,
+.footer_wrapper p {
+    color: #fff;
+    font-size: 0.9em;
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 7px;
+    position: relative;
+    text-shadow: 0 0 40px #000;
+    font-weight: bold;
+}
+.footer_wrapper a:hover {
+    text-shadow: 0 0 30px #000;
+}
+.footer_wrapper h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    padding-right: 15px;
+    border-right: 3px solid;
+}
+.footer_wrapper a::before,
+.footer_wrapper p::before {
+    content: "";
+    background-color: #fff;
+    width: 1px;
+    height: 1px;
+    transition: 0.2s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    margin-right: 18px;
+}
+.footer_wrapper a:hover::before {
+    width: 12px;
+}
+.custom_shape_divider_bottom_1757751444 {
+    /* position: absolute; */
+    width: 100%;
+    overflow: hidden;
+    transform: rotate(180deg);
+    margin-bottom: -1px;
+}
+
+.custom_shape_divider_bottom_1757751444 svg {
+    width: 100%;
+    height: 52px;
+}
+
+.custom_shape_divider_bottom_1757751444 .shape_fill {
+    fill: var(--primary-text-color);
+}
+.links_wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.footer_links,
+.contact_us {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.copyright {
+    width: 100%;
+    text-align: center;
+    color: #ffffffa1;
+    font-size: 0.7em;
+    background-color: var(--primary-text-color);
+}
+
+@media (max-width: 710px) {
+    .all_footer {
+        margin-bottom: 60px;
+        margin-top: 5em;
+    }
+    .footer_wrapper {
+        height: 550px;
+    }
+    .links_wrapper {
+        flex-direction: column;
+        gap: 30px;
+        width: fit-content;
+    }
+}
+
+.stars:last-of-type {
+    bottom: 0px !important;
+    width: 35px !important;
+    height: 35px !important;
+}
+.stars:nth-last-of-type(2) {
+    top: 10px !important;
+    right: 25px !important;
+}

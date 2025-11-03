@@ -1,0 +1,33 @@
+/* mostSale.module.css */
+.most_wrapper{
+    margin-bottom: 50px;
+}
+.mostSale {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* دو تا کنار هم */
+    margin-top: 20px;
+    column-gap: 40px;
+    padding: 0 20px;
+}
+
+@media (max-width: 640px) {
+    .mostSale {
+        grid-template-columns: 1fr; /* تو عرض کم همه زیر هم */
+    }
+}
+
+.most_products {
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.rates {
+    color: #008bdb;
+    font-weight: bold;
+    font-size: 2em;
+    width: 15px;
+}

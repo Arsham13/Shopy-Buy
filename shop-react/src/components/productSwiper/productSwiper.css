@@ -1,0 +1,71 @@
+.swiper {
+    background-color: var(--primary-text-color);
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 10px;
+}
+/* .swiper {
+    animation: fadeIn cubic-bezier(0.6, -0.28, 0.735, 0.045) both 0.2s;
+    animation-timeline: view(100% 0);
+    animation-iteration-count: 1;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0.5;
+        transform: translateX(50%) translateY(100px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0%) translateY(0px) scale(1);
+    }
+} */
+.swiper-wrapper {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.column a, .column p {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.column a {
+    margin-top: 20px;
+    padding-right: 8px;
+    box-shadow: 0 1px 0 #fff;
+}
+.shegeftP {
+    font-family: "shegeft" !important;
+    margin: 0;
+    font-size: 3em;
+}
+.shegeft {
+    align-items: center;
+    height: 100%;
+}
+.shegeft img {
+    width: 90px;
+    height: 90px;
+}
+
+.column a:hover{
+    box-shadow: 0 2px 0 #fff;
+}
+.column a:hover .arrow::before {
+    width: 17px;
+    margin-right: -5px;
+}
+
+@media (max-width: 380px) {
+    .swiper {
+        height: 350px;
+    }
+    .shegeftP {
+        font-size: 2.5em;
+    }
+    .shegeft img {
+        width: 70px;
+        height: 70px;
+    }
+}

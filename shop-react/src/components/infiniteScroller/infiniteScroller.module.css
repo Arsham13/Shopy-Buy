@@ -1,0 +1,73 @@
+.wrap {
+    width: min(1100px, 90vw);
+    display: grid;
+    place-self: center;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+.wrap h3{
+    margin-right: -3px;
+}
+
+.scroller {
+    position: relative;
+    overflow: hidden;
+    padding-block: 1rem;
+    border-radius: 20px;
+
+    /* محو شدن لبه‌ها */
+    -webkit-mask: linear-gradient(
+        to right,
+        transparent,
+        #000 8%,
+        #000 92%,
+        transparent
+    );
+    mask: linear-gradient(
+        to right,
+        transparent,
+        #000 8%,
+        #000 92%,
+        transparent
+    );
+}
+
+.track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    will-change: transform;
+    animation: scroll-left 20s linear infinite;
+    position: relative;
+}
+
+/* توقف با هاور */
+.scroller:hover .track {
+    animation-play-state: paused;
+}
+
+/* آیتم لوگو */
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 11vw;
+    border-radius: 16px;
+}
+.item img {
+    max-width: 100%;
+    min-width: 70px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* انیمیشن حرکت به چپ */
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(50% + 1.5rem));
+    }
+}
