@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../../components/navbar/Navbar";
 import ImageSwiper from "../../components/imageSwiper/ImageSwiper";
+import TextTypeSwiper from "../../components/textTypeSwiper/TextTypeSwiper";
 import ProductSwiper from "../../components/productSwiper/ProductSwiper";
 import InfiniteScroller from "../../components/infiniteScroller/InfiniteScroller";
 import MostSale from "../../components/mostSale/MostSale";
@@ -12,7 +13,7 @@ import { useEffect } from "react";
 
 function Home() {
     const [isWide, setIsWide] = useState(window.innerWidth > 710);
-
+    window.scroll(0, 0);
     useEffect(() => {
         const handleResize = () => {
             setIsWide(window.innerWidth > 710);
@@ -23,12 +24,14 @@ function Home() {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
+
     return (
         <>
             <Navbar isWide={isWide} />
             <main>
-                {/* <TypeWriter text={text} speed={3} /> */}
                 <ImageSwiper />
+                <TextTypeSwiper />
                 <LoopNavar />
                 <ProductSwiper />
                 <InfiniteScroller />

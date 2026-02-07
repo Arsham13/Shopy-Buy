@@ -1,21 +1,23 @@
 .swiper {
-    width: 90vw !important;
+    width: 100vw !important;
     max-width: 100% !important;
     height: 400px;
-    border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     cursor: grab;
     margin-bottom: 80px;
+    padding: 5px !important;
+    border-radius: 5px;
 }
 .imageSwiper {
     background: transparent !important;
     border-radius: 0;
-    padding: 0 !important;
+    padding: 10px !important;
     margin-bottom: 180px !important;
     height: auto !important;
     cursor: auto !important;
     margin-bottom: 150px;
     box-shadow: none !important;
+    width: fit-content !important;
 }
 .swiper:active {
     cursor: grabbing;
@@ -23,6 +25,9 @@
 
 .swiper-slide {
     width: 100%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 
 .swiper-slide img {
@@ -33,59 +38,56 @@
 }
 
 .swiper-pagination-bullet {
-    width: 6px !important;
-    height: 6px !important;
-    background: #ffffff51 !important;
-    /* رنگ دلخواه */
+    width: 4px !important;
+    height: 4px !important;
+    margin: 0 2px !important;
+    background: var(--primary-lightest-text-color) !important;
     opacity: 1 !important;
-    /* همیشه قابل دید */
-    margin: 0 5px !important;
-    /* فاصله */
-    transition: all ease-in-out 0.3s !important;
+    transition: all ease-in-out 0.2s !important;
     border-radius: 9999px !important;
-    /* دایره‌ای */
     /* box-shadow: 0 0 2px #4824c9; */
 }
 
 /* دایره فعال */
 .swiper-pagination-bullet-active {
-    width: 13px !important;
-    background: #ffffff !important;
-    box-shadow: 0 0 5px var(--primary-color) !important;
-    /* رنگ دایره فعال */
+    width: 10px !important;
+    background: var(--primary-text-color) !important;
+    box-shadow: 0 0 10px -2px var(--primary-color) !important;
 }
 
 /* فلش‌ها */
 .swiper-button-next,
 .swiper-button-prev {
-    color: var(--primary-color) !important;
+    color: var(--primary-text-color) !important;
+    font-weight: bold;
     /* رنگ فلش */
-    width: 40px !important;
-    height: 40px !important;
+    background: var(--primary-lighter-color) !important;
+    width: 30px !important;
+    height: 30px !important;
     top: 50% !important;
-    transform: translateY(-50%) !important;
-    background: rgba(255, 255, 255, 0.5) !important;
+    left: 0 !important;
     transition: all ease-in-out 0.3s !important;
     border-radius: 50% !important;
+}
+.swiper-button-prev {
+    right: 0 !important;
 }
 
 .swiper-button-next::after,
 .swiper-button-prev::after {
-    font-size: 30px !important;
+    font-size: 15px !important;
 }
 
 /* فلش ها وقتی هاور میشن */
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-    background: var(--placeholder-color) !important;
-    color: #fff !important;
+    background: var(--primary-light-color) !important;
 }
 
 .stars {
     width: 25px;
     height: 25px;
     right: 5%;
-    bottom: -99%;
     animation-duration: 3s;
 }
 
@@ -106,24 +108,24 @@ svg linearGradient stop {
     height: 50px;
     right: inherit;
     left: 5%;
-    top: 0;
+    top: 0px;
     animation-duration: 5s;
 }
 
-@media (width <=650px) {
+@media (width <= 700px) {
     .swiper-button-next,
     .swiper-button-prev {
-        width: 30px !important;
-        height: 30px !important;
+        width: 25px !important;
+        height: 25px !important;
     }
 
     .swiper-button-next::after,
     .swiper-button-prev::after {
-        font-size: 20px !important;
+        font-size: 10px !important;
     }
 }
 
-@media (width <= 420px) {
+@media (width <= 500px) {
     .swiper-button-next,
     .swiper-button-prev {
         width: 0px !important;

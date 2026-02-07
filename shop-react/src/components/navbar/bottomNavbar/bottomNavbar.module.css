@@ -17,10 +17,15 @@
     gap: 5px;
     color: var(--primary-light-text-color);
     text-decoration: none;
+    cursor: pointer;
+}
+
+.active{
+    color: var(--primary-color) !important;
 }
 
 .bottom_icons{
-    color: var(--primary-light-text-color);
+    /* color: var(--primary-light-text-color); */
     width: 25px;
     height: 25px;
 }

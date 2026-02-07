@@ -6,6 +6,7 @@ import Footer from "../../components/footer/Footer";
 import ProductsPage from "../../components/productsPage/ProductsPage";
 
 function Products() {
+    window.scroll(0, 0)
     const [isWide, setIsWide] = useState(window.innerWidth > 710);
     const [isProductRow, setIsProductRow] = useState(window.innerWidth < 630);
     const [isShowFilters, setIsShowFilters] = useState(window.innerWidth < 956);

@@ -2,18 +2,19 @@
     margin: 80px 0;
     margin-top: -100px;
     direction: ltr;
-    background: linear-gradient(90deg, var(--primary-color) -20%, var(--primary-second-color) 170%);
-    position: absolute;
-    width: 100%;
+    background: linear-gradient(
+        90deg,
+        var(--primary-color) -10%,
+        var(--primary-second-color) 120%
+    );
     overflow: hidden;
     display: flex;
-    justify-self: center;
-    /* transform: rotate(-2deg); */
+    transform: rotate(-1deg);
 }
 
 .scroller {
     display: flex;
-    animation: scroll 25s linear infinite both;
+    animation: scroll 60s linear infinite both;
 }
 
 .scroller span {

@@ -1,0 +1,71 @@
+.product_cat {
+    cursor: auto;
+    width: 400%;
+    /* max-width: 500px; */
+    transform: rotate3d(1, 0, 0, 90deg) translateY(-24.2em);
+    position: absolute;
+    right: -5px;
+    top: 2.5em;
+    height: fit-content;
+    background-color: #ffffff;
+    border-radius: 0px 0px 3px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 40px 30px;
+    align-content: center;
+    padding: 20px 15px;
+    user-select: none;
+    backdrop-filter: blur(0);
+    transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.show_product_cat {
+    transform: rotate3d(1, 0, 0, 0deg) translateY(0em) !important;
+    opacity: 1;
+    transition: all 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.product_cat a {
+    color: var(--primary-text-color);
+    background-color: var(--placeholder-color);
+    text-align: center;
+    height: fit-content;
+    padding: 10px 15px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    opacity: 1 !important;
+    z-index: 1;
+}
+.product_cat a:hover {
+    color: #fff;
+    box-shadow: 0 0 25px -10px #000;
+}
+.product_cat a::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    left: 0;
+    top: 0%;
+    transform: scale(0);
+    border-radius: 10px;
+    z-index: -1;
+    transition: 0.2s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.product_cat a:hover::before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.bottom_style {
+    border: 1px solid #0000003b;
+    transform: rotate3d(1, 0, 0, 90deg) translateY(23em);
+    border-radius: 20px 20px 0 0;
+    top: -21.9em;
+    right: 0;
+    width: 100%;
+    backdrop-filter: blur(7px) !important;
+    background-color: #ffffffa2;
+    gap: 20px 15px;
+}

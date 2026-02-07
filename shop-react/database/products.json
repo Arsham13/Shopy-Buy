@@ -7,7 +7,10 @@
             "takhfifprice": 2000000,
             "category": "مبلمان",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "صندلی چوبی کلاسیک با روکش چرمی",
             "stock": 15,
             "rating": 4.4,
@@ -21,7 +24,10 @@
             "takhfifprice": 20000000,
             "category": "روشنایی",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "لوستر مدرن با طراحی مینیمال و نور سفید",
             "stock": 5,
             "rating": 4.8,
@@ -35,7 +41,10 @@
             "takhfifprice": 4000000,
             "category": "روشنایی",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "آباژور ایستاده با پایه فلزی و شید پارچه‌ای",
             "stock": 12,
             "rating": 4.3,
@@ -46,10 +55,13 @@
             "id": 5,
             "name": "فرش مدرن طرح هندسی 2×3",
             "price": 5400000,
-            "takhfifprice": 5000000,
+            "takhfifprice": 0,
             "category": "فرش و قالیچه",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "فرش مدرن با طرح هندسی و رنگ‌بندی خنثی",
             "stock": 6,
             "rating": 4.7,
@@ -63,7 +75,10 @@
             "takhfifprice": 20000000,
             "category": "فرش و قالیچه",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "قالیچه گرد مناسب برای اتاق نشیمن",
             "stock": 10,
             "rating": 4.2,
@@ -74,9 +89,13 @@
             "id": 7,
             "name": "تابلو دیواری سه‌تکه طبیعت",
             "price": 1350000,
+            "takhfifprice": 0,
             "category": "اکسسوری و دکور",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "تابلو سه‌تکه چاپی با قاب چوبی",
             "stock": 20,
             "rating": 4.9,
@@ -90,7 +109,10 @@
             "takhfifprice": 100000,
             "category": "اکسسوری و دکور",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "گلدان سرامیکی مات مناسب برای دکور مدرن",
             "stock": 35,
             "rating": 4.5,
@@ -104,7 +126,10 @@
             "takhfifprice": 300000,
             "category": "پرده و پارچه",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "پرده حریر سفید مناسب برای اتاق نشیمن",
             "stock": 14,
             "rating": 4.1,
@@ -118,7 +143,10 @@
             "takhfifprice": 200000,
             "category": "پوشش دیوار",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "کاغذ دیواری قابل شستشو با طرح کلاسیک",
             "stock": 50,
             "rating": 4.3,
@@ -132,7 +160,10 @@
             "takhfifprice": 2300000,
             "category": "پوشش کف",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "کفپوش لمینت مقاوم در برابر رطوبت و ضربه",
             "stock": 30,
             "rating": 4.6,
@@ -146,9 +177,12 @@
             "takhfifprice": 2700000,
             "category": "پوشش کف",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "کفپوش لمینت مقاوم در برابر رطوبت و ضربه",
-            "stock": 30,
+            "stock": 3,
             "rating": 4.6,
             "saleCount": 43,
             "reviews": []
@@ -160,7 +194,10 @@
             "takhfifprice": 2000000,
             "category": "پوشش کف",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "کفپوش لمینت مقاوم در برابر رطوبت و ضربه",
             "stock": 30,
             "rating": 4.6,
@@ -174,7 +211,10 @@
             "takhfifprice": 2000000,
             "category": "پوشش کف",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "کفپوش لمینت مقاوم در برابر رطوبت و ضربه",
             "stock": 30,
             "rating": 4.6,
@@ -188,9 +228,12 @@
             "takhfifprice": 3000000,
             "category": "پوشش کف",
             "brand": "خانه‌آرا",
-            "images": ["./assets/images/panter_logo.jpg"],
+            "images": [
+                "/assets/images/panter_logo.jpg",
+                "/assets/images/adata_logo.png"
+            ],
             "description": "کفپوش لمینت مقاوم در برابر رطوبت و ضربه",
-            "stock": 30,
+            "stock": 0,
             "rating": 4.6,
             "saleCount": 43,
             "reviews": []

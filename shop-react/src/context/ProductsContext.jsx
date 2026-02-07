@@ -21,7 +21,7 @@ export function ProductsProvider({ children }) {
             setLoading(false);
         }
     };
-
+    console.log(products);
     useEffect(() => {
         fetchProducts();
     }, []);

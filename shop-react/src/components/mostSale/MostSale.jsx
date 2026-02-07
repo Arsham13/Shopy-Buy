@@ -11,6 +11,9 @@ function MostSale() {
     if (error) return <p>{error}</p>;
 
     return (
+        <>
+            <img src="/assets/images/stars.svg" className="stars" />
+
         <div className={styled.most_wrapper}>
             <h3 className="title">
                 <svg
@@ -41,7 +44,7 @@ function MostSale() {
             <div className={styled.mostSale}>
                 {products
                     .sort((a, b) => b.saleCount - a.saleCount)
-                    .slice(0, 8)
+                    .slice(0, 5)
                     .map((product, index) => (
                         <div key={product.id} className={styled.most_products}>
                             <h1 className={styled.rates}>
@@ -61,6 +64,9 @@ function MostSale() {
                     ))}
             </div>
         </div>
+        <img src="/assets/images/stars.svg" className="stars" />
+
+        </>
     );
 }
 

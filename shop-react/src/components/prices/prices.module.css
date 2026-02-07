@@ -1,0 +1,93 @@
+.shegeft_prices {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+.shegeft_prices b {
+    margin-left: 5px;
+}
+
+.shegeft_baner {
+    font-size: 10px;
+    position: absolute;
+    text-align: center;
+    width: 80px;
+    padding: 2px 0;
+    background-color: var(--primary-second-color);
+    top: 0px;
+    right: 0px;
+    color: #fff;
+    border-radius: 0 8px 0 8px;
+    font-weight: bold;
+    z-index: 1;
+}
+.shegeft_detail_product_baner{
+    border-radius: 8px 8px 0 0;
+    right: calc(50% - 40px);
+    border: 1px solid #d3d3d3;
+    border-bottom: 0;
+    z-index: -1;
+    top: -19px;
+}
+
+.product_prices {
+    display: flex;
+    flex-direction: column;
+}
+
+.product_price {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary-text-color);
+    animation: var(--left-slide-animation) 0.4s cubic-bezier(0.08, -0.05, 0.265, 1.55);
+}
+
+.product_preprice {
+    font-size: 11px;
+    font-weight: 1000;
+    color: #777;
+    text-decoration: line-through var(--primary-light-second-color);
+}
+
+.toman {
+    margin-left: 13px;
+    font-size: 0.75em;
+    font-weight: bolder;
+}
+.toman::after {
+    content: "ما";
+    position: absolute;
+    margin-right: 0px;
+    margin-top: 5px;
+    font-size: bolder;
+}
+
+.toman::before {
+    content: "ن";
+    position: absolute;
+    margin-right: 11px;
+    margin-top: -5px;
+}
+
+.shegeft_pricesTakhfif {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.row .shegeft_pricesTakhfif {
+    width: fit-content;
+}
+
+.takhfif_num p {
+    color: #fff !important;
+    font-weight: 400;
+    font-size: 11px;
+    height: fit-content;
+    padding: 4px 6px;
+    border-radius: 99px;
+    background-color: var(--primary-second-color);
+}

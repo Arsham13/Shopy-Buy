@@ -5,8 +5,8 @@
     position: fixed;
     width: 100%;
     z-index: 999;
-    background-color: #fff;
-    box-shadow: 0 0px 10px 0px #eeeeee;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 .nav2 {
@@ -19,10 +19,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px 20px;
-    background-color: #fff;
 }
 
 .search_input {
+    position: relative;
     background-color: #ebebeb;
     /* border: #ffffff 1px solid; */
     border-radius: 9999px;
@@ -89,13 +89,92 @@
     justify-content: space-between;
     position: relative;
 }
+.search_results {
+    background-color: #fff;
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
-@media screen and (max-width: 960px) {
-    .search_input input {
-        width: 190px;
-    }
-    .search_input input:focus {
-        width: 230px;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+.search_results p {
+    color: var(--primary-text-color) !important;
+}
+
+.modal {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    background-color: #ffffff;
+    z-index: 1001;
+    width: 100vw;
+    height: 100vh;
+    gap: 10px;
+    padding: 20px 20px 20px 20px;
+    transform: scale(0);
+    transform-origin: top left;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.show_modal {
+    top: 0%;
+    transform: scale(1);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.close_mark {
+    top: 0;
+    border-radius: 50%;
+    padding: 5px;
+    background-color: #ffffff1a;
+    transition: 0.1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    cursor: pointer;
+}
+.close_mark:hover {
+    color: var(--primary-text-color) !important;
+    background-color: #ffffffe5;
+}
+.modal_search {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #e9e9e9;
+    padding: 0px 20px;
+    padding-left: 0;
+    border-radius: 999px;
+    height: fit-content;
+    /* justify-content: space-between; */
+}
+.modal_search input {
+    font-size: 18px;
+}
+.modal_search .search_btn {
+    padding: 14px;
+    width: 65px;
+}
+.modal input {
+    width: 100%;
+}
+
+.absolute_results {
+    border-radius: 8px;
+    border: 1px solid #eee;
+    box-shadow: 0 15px 15px 0 #00000056;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    top: 73%;
+    right: 0;
+    z-index: 100;
+    height: fit-content;
+    max-height: 500px;
+}
+
+@media screen and (max-width: 875px) {
+    .search_input {
+        padding: 0;
     }
 }
 
@@ -113,6 +192,7 @@
     }
     .search_input {
         width: 100%;
+        padding-right: 18px;
     }
 
     .navbar img {
@@ -130,55 +210,5 @@
     }
 
     .search_input input {
-        display: none;
-    }
-
-    .modal {
-        position: fixed;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        background-color: #000000dc;
-        border-radius: 0 0 20% 20%;
-        z-index: 1001;
-        width: 100vw;
-        height: fit-content;
-        gap: 30px;
-        padding: 20px 20px 85px 20px;
-        box-shadow: 0 10px 20px -5px #000000dc;
-        top: -100%;
-        transition: top 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-    }
-    .show_modal {
-        top: 0%;
-        transition: top 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
-    }
-    .close_mark {
-        top: 0;
-        border-radius: 50%;
-        padding: 5px;
-        background-color: #ffffff1a;
-    }
-    .close_mark:hover {
-        color: var(--primary-text-color) !important;
-        background-color: #ffffffe5;
-    }
-    .modal_search {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        background-color: #fff;
-        padding: 0px 20px;
-        padding-left: 0;
-        border-radius: 999px;
-        height: fit-content;
-        /* justify-content: space-between; */
-    }
-    .modal_search .search_btn {
-        padding: 14px;
-        width: 65px;
-    }
-    .modal input {
-        width: 100%;
     }
 }

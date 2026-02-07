@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "./bottomNavbar.module.css";
 import {
     HiMiniListBullet,
@@ -7,40 +7,61 @@ import {
     HiOutlineUser,
 } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import { ProductsContext } from "../../../context/ProductsContext";
+import SmallProductCategory from "../../smallProductCategory/SmallProductCategory";
 
 function BottomNavbar() {
+    const [productCatActive, setProductCatActive] = useState(false);
+
+    const handleProductCatShow = () => {
+        if (!productCatActive) {
+            setProductCatActive(true);
+        }
+    };
+
     return (
-        <div className={styled.bottom_navbar}>
-            <div className={styled.links}>
-                <Link to={"#"} className={styled.links}>
-                    <HiOutlineHome className={styled.bottom_icons} />
+        <>
+            <div className={styled.bottom_navbar}>
+                <div className={styled.links}>
+                    <Link to={"/"} className={styled.links}>
+                        <HiOutlineHome className={styled.bottom_icons} />
 
-                    <h4>خانه</h4>
-                </Link>
-            </div>
+                        <h4>خانه</h4>
+                    </Link>
+                </div>
 
-            <div className={styled.links}>
-                <Link className={styled.links} to={"#"}>
-                    <HiMiniListBullet className={styled.bottom_icons} />
-                    <h4>دسته بندی ها</h4>
-                </Link>
-            </div>
+                <div className={styled.links}>
+                    <span
+                        onClick={handleProductCatShow}
+                        className={`${styled.links} ${
+                            productCatActive ? styled.active : ""
+                        }`}
+                    >
+                        <HiMiniListBullet className={styled.bottom_icons} />
+                        <h4>دسته بندی ها</h4>
+                        <SmallProductCategory
+                            isOpen={productCatActive}
+                            onClose={() => setProductCatActive(false)}
+                            bottom={true}
+                        />
+                    </span>
+                </div>
 
-            <div className={styled.links}>
-                <Link to={"#"} className={styled.links}>
-                    <HiOutlineUser className={styled.bottom_icons} />
-                    <h4>پروفایل</h4>
-                </Link>
-            </div>
+                <div className={styled.links}>
+                    <Link to={"#"} className={styled.links}>
+                        <HiOutlineUser className={styled.bottom_icons} />
+                        <h4>پروفایل</h4>
+                    </Link>
+                </div>
 
-            <div className={styled.links}>
-                <Link to={"#"} className={styled.links}>
-                    <HiOutlineShoppingBag className={styled.bottom_icons} />
-                    <h4>سبد خرید</h4>
-                </Link>
-            </div>
+                <div className={styled.links}>
+                    <Link to={"#"} className={styled.links}>
+                        <HiOutlineShoppingBag className={styled.bottom_icons} />
+                        <h4>سبد خرید</h4>
+                    </Link>
+                </div>
 
-            {/* <div className={styled.links}>
+                {/* <div className={styled.links}>
                 <a to={"#"} className={styled.links}>
                     <svg
                         width="25px"
@@ -76,7 +97,9 @@ function BottomNavbar() {
                     <h4>پشتیبانی</h4>
                 </a>
             </div> */}
-        </div>
+            </div>
+            {/* {productCatActive && <div className="modal"></div>} */}
+        </>
     );
 }
 

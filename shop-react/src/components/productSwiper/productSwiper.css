@@ -2,7 +2,6 @@
     background-color: var(--primary-text-color);
     display: flex !important;
     align-items: center !important;
-    padding: 0 10px;
 }
 /* .swiper {
     animation: fadeIn cubic-bezier(0.6, -0.28, 0.735, 0.045) both 0.2s;
@@ -65,7 +64,7 @@
         font-size: 2.5em;
     }
     .shegeft img {
-        width: 70px;
-        height: 70px;
+        width: 90px;
+        height: 90px;
     }
 }

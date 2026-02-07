@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "./footer.module.css";
 import { Link } from "react-router-dom";
+import { RiInstagramLine, RiTelegram2Fill } from "react-icons/ri";
 
 function Footer() {
     const currentShamsiYear = new Date().toLocaleDateString("fa-IR", {
@@ -32,7 +33,19 @@ function Footer() {
                 </svg>
             </div>
             <footer className={styled.footer_wrapper}>
-                <img src="/assets/images/logo.png" alt="logo" />
+                <div className={styled.logo_wrapper}>
+                    <img src="/assets/images/logo.png" alt="logo" />
+                    <p>بهترین فروشگاه حال حاضر ایران</p>
+                    <div className="row gap_15 justify_center">
+                        <RiTelegram2Fill
+                            className={styled.app_icons}
+                        />
+                        <RiInstagramLine
+                            className={styled.app_icons}
+
+                        />
+                    </div>
+                </div>
 
                 <img
                     src="/assets/images/stars.svg"
@@ -72,11 +85,7 @@ function Footer() {
                 </div>
             </footer>
             <div className={styled.copyright}>
-                <p>
-                    {" "}
-                    &copy; ۱۴۰۳ - {currentShamsiYear} تمامی حقوق متعلق به آرشام
-                    سراجی میباشد
-                </p>
+                <p> &copy; ۱۴۰۳ - {currentShamsiYear} تمامی حقوق محفوظ است</p>
             </div>
         </div>
     );

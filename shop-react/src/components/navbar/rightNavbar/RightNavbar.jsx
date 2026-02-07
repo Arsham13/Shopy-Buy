@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "./rightNavbar.module.css";
 import {
     HiMiniListBullet,
@@ -12,55 +12,61 @@ import { useContext } from "react";
 import { ProductsContext } from "../../../context/ProductsContext";
 import { useRef } from "react";
 import { useState } from "react";
+import SmallProductCategory from "../../smallProductCategory/SmallProductCategory";
 
 function RightNavbar() {
-    const { products } = useContext(ProductsContext);
-
-    const categories = [];
-
-    for (let i = 0; i < products.length; i++) {
-        const category = products[i].category;
-        // اگر دسته قبلا اضافه نشده، به آرایه اضافه کن
-        if (!categories.includes(category)) {
-            categories.push(category);
-        }
-    }
-
-    const product_cat = useRef(null);
     const [productCatActive, setProductCatActive] = useState(false);
 
-    const handleProductCatEnter = () => {
-        product_cat.current.classList.add(styled.show_product_cat);
-        setProductCatActive(true);
-        document.body.style.overflow = "hidden";
+    const categoryWrapperRef = useRef(null);
+
+    // useEffect(() => {
+    //     const handleClickOutside = (e) => {
+    //         if (
+    //             productCatActive &&
+    //             categoryWrapperRef.current &&
+    //             !categoryWrapperRef.current.contains(e.target)
+    //         ) {
+    //             setProductCatActive(false);
+    //         }
+    //     };
+
+    //     document.addEventListener("mousedown", handleClickOutside);
+
+    //     return () => {
+    //         document.removeEventListener("mousedown", handleClickOutside);
+    //     };
+    // }, [productCatActive]);
+
+    const handleProductCatShow = () => {
+        if (!productCatActive) {
+            setProductCatActive(true);
+            // document.body.style.overflow = "hidden";
+        } else {
+            // setProductCatActive(false);
+        }
     };
-    const handleProductCatLeave = () => {
-        product_cat.current.classList.remove(styled.show_product_cat);
-        setProductCatActive(false);
-        document.body.style.overflow = "auto";
-    };
+
+
+
     return (
         <>
             <div className={styled.right_navbar}>
                 <div className={styled.links}>
                     <span
-                        onMouseEnter={handleProductCatEnter}
-                        onMouseLeave={handleProductCatLeave}
+                        ref={categoryWrapperRef}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onClick={handleProductCatShow}
                         className={`${styled.links} ${
                             productCatActive ? styled.active : ""
                         }`}
-                        to={"#"}
                     >
                         <HiMiniListBullet className="icons" />
 
-                        <h4>دسته بندی ها</h4>
-                        <div ref={product_cat} className={styled.product_cat}>
-                            {categories.map((cat) => (
-                                <Link key={cat} to={`/category/${cat}`}>
-                                    {cat}
-                                </Link>
-                            ))}
-                        </div>
+                        <h4 id="category_link">دسته بندی ها</h4>
+                        <SmallProductCategory
+                            isOpen={productCatActive}
+                            onClose={() => setProductCatActive(false)}
+                        />
                     </span>
                 </div>
 
@@ -95,9 +101,7 @@ function RightNavbar() {
                     </Link>
                 </div>
             </div>
-            {productCatActive && (
-                <div className={styled.products_category}></div>
-            )}
+            {productCatActive && <div className="modal"></div>}
         </>
     );
 }

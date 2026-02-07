@@ -11,6 +11,12 @@
     line-height: 2em;
     gap: 20px;
 }
+.image_infos div h2 {
+    font-size: 1.7rem;
+}
+.image_infos div p {
+    font-size: 1.1rem;
+}
 .image_infos img {
     width: 25%;
     align-self: center;
@@ -34,7 +40,9 @@
     transition: all 11s ease-out;
 }
 
-.swiper_star{
+.swiper_star {
+    bottom: -99%;
+
     width: 35px !important;
     height: 35px !important;
 }
@@ -51,6 +59,6 @@
         top: 15%;
         left: 0;
         width: 50px;
-        rotate: 90deg;
+        transform: rotate(90deg);
     }
 }

@@ -1,0 +1,33 @@
+.images_swiper {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    padding: 0 10px !important;
+    height: 400px !important;
+    animation: var(--right-slide-animation) 0.7s cubic-bezier(0.08, -0.05, 0.265, 1.55);
+}
+.images_swiper img {
+    object-fit: cover !important;
+    border-radius: 7px;
+    width: 100%;
+    height: 100%;
+    scale: 0.95;
+}
+
+@media (max-width: 1000px) {
+    .images_swiper {
+        height: 300px !important;
+    }
+}
+@media (max-width: 700px) {
+    .images_swiper {
+        height: 250px !important;
+    }
+}
+@media (max-width: 500px) {
+    .images_swiper {
+        height: 150px !important;
+    }
+    .images_swiper img {
+        scale: 1;
+    }
+}

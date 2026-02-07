@@ -21,10 +21,17 @@
     padding: 0 15px;
 }
 .products {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 5px;
+    width: 100%;
+}
+.product_container {
     width: 100%;
     display: grid;
-    column-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 .product {
     height: 400px;
@@ -37,11 +44,11 @@
     padding: 10px 15px;
     position: sticky;
     z-index: 1;
-    top: 125px;
+    top: 100px;
     height: fit-content;
     margin: 13px 0;
     width: 370px;
-    transition: 0.8s top cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    transition: 0.4s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
 .filters h3 {
@@ -62,37 +69,48 @@
 .details {
     padding: 10px 0;
     border-bottom: 1px solid #dddddd;
+    transition: 0.2s ease-in;
+}
+
+.details:hover {
+    background-color: #f8f8f8;
+}
+.details:active {
+    background-color: #e6e6e6;
 }
 .summary {
     overflow: hidden;
     max-height: 0;
     /* box-shadow: 0 2px 12px -8px #7e7e7e; */
-
-    transition: max-height 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    filter: opacity(0);
+    transition: max-height 0.3s ease-in-out,
+        filter 0.7s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 .open {
     max-height: 300px;
-    transition: max-height 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    filter: opacity(1);
+    transition: max-height 0.4s ease-in-out,
+        filter 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 .details i {
     transition: transform 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 .rotate {
-    transform: rotate(180deg);
+    transform: rotate3d(1, 0, 0, 180deg);
     transition: transform 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 .information {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 7px;
     padding: 10px;
-    background-color: #f5f5f5;
     border-radius: 0 0 8px 8px;
+    background-color: #f0f0f0;
 }
 .category_summary .information {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 
 /* Hide the default checkbox */
@@ -100,7 +118,6 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-
     gap: 7px;
 }
 
@@ -116,11 +133,20 @@
     align-items: center;
     position: relative;
     cursor: pointer;
-    font-size: 17px;
-    gap: 10px;
+    font-size: 15px;
+    gap: 7px;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    margin-bottom: 5px;
+    transition: 0.2s ease-in;
+}
+
+.checkbox:hover {
+    color: var(--primary-text-color);
+}
+
+.checkbox:active {
+    transition-duration: 0.1s;
+    transform: scale(0.98);
 }
 
 /* Create a custom checkbox */
@@ -128,14 +154,17 @@
     position: relative;
     height: 1.3em;
     width: 1.3em;
-    background-color: #2196f300;
+    background-color: #21f39100;
     border-radius: 0.25em;
     transition: all 0.25s;
+    border: 0.1em solid;
+    border-color: var(--primary-lightest-text-color);
 }
 
 /* When the checkbox is checked, add a background */
 .checkbox input:checked ~ .checkmark {
     background-color: var(--primary-color);
+    border: 1px solid #00000015;
 }
 .checkbox input:focus ~ .checkmark {
     outline: 2px solid var(--placeholder-color);
@@ -147,26 +176,31 @@
     content: "";
     position: absolute;
     transform: rotate(0deg);
-    border: 0.1em solid;
+    border: 0px solid transparent;
     left: 0;
     top: 0;
     width: 1.3em;
     height: 100%;
     border-radius: 0.25em;
-    transition: all 0.25s, border-width 0.1s;
-    border-color: #666;
+    transition: all 0.25s, border-width 0.15s;
 }
-.checkbox:hover .checkmark:after {
-    border-color: var(--primary-color);
+.checkbox:hover .checkmark {
+    border-color: var(--primary-lighter-text-color);
+}
+
+.fromto_price {
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
 /* Show the checkmark when checked */
 .checkbox input:checked ~ .checkmark:after {
-    left: 0.5em;
-    top: 0.28em;
-    width: 0.28em;
-    height: 0.57em;
-    border-color: #fff0 white white #fff0;
+    left: 0.45em;
+    top: 0.18em;
+    width: 0.3em;
+    height: 0.67em;
+    border-color: #fff0 #fff #fff #fff0;
     border-width: 0 0.15em 0.15em 0;
     border-radius: 0em;
     transform: rotate(45deg);
@@ -189,7 +223,7 @@
     }
 }
 @media (max-width: 440px) {
-    .products {
+    .product_container {
         grid-template-columns: repeat(1, 1fr) !important;
     }
 }
@@ -272,7 +306,7 @@
     width: 100vw;
     height: 100vh;
     background-color: #0000004d;
-    z-index: 11;
+    z-index: 1000;
     transition: 0.1s top cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 .modal_show {
@@ -330,8 +364,9 @@
     color: #fff;
     border: 1px solid #c41717;
     background-color: #e71d1d;
-    transition: filter 0.3s ease-in-out, outline 0.1s ease-in-out;
+    transition: all 0.3s ease-out;
     overflow: hidden;
+    outline: 0;
     position: relative;
     cursor: pointer;
 }
@@ -340,13 +375,49 @@
 }
 .clear_all_btn:active {
     outline: 3px solid #e71d1d7a;
+    transform: scale(0.98);
+    transition-duration: 0.1s;
 }
 
-.btn_disabled {
-    filter: opacity(0.6) !important;
-    cursor: not-allowed !important;
-    user-select: none !important;
-    outline: none !important;
+.active_filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 10px 0 15px;
+}
+
+.active_filter {
+    padding: 3px 9px;
+    padding-right: 6px;
+    font-size: 13px;
+    background-color: var(--primary-light-color);
+    color: var(--primary-text-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.active_filter:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+.active_filter:active {
+    transition: 0.1s ease-out;
+    transform: scale(0.98);
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.toggle_filters {
+    display: block;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.shegefts_filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 @media (max-width: 956px) {
@@ -354,21 +425,27 @@
         flex-direction: column;
     }
     .filters {
+        background-color: #ffffffa9;
+        backdrop-filter: blur(5px);
         position: absolute;
-        z-index: 12;
-        width: calc(100% - 50px);
+        z-index: 1001;
+        width: calc(100% - 10px);
         height: fit-content;
         right: 0;
-        top: -153vh;
-        transform: scale(0);
-        filter: opacity(0);
-        margin: 0 25px;
+        top: -10%;
+        transform: rotate3D(1, 0, 0, -90deg);
+        margin: 0 5px;
+    }
+    .information {
+        background-color: #ffffff7c;
+    }
+    .details {
+        border-bottom-color: #d1d1d1;
     }
     .show {
-        transition: 0.3s top cubic-bezier(0.785, 0.135, 0.15, 0.86);
-        top: 0;
-        transform: scale(1);
-        filter: opacity(1);
+        transition: 0.3s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        top: -2.5%;
+        transform: rotate3D(1, 0, 0, 0deg);
     }
 }
 @media (max-width: 370px) {

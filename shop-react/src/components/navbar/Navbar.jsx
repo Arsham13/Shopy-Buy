@@ -1,24 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "./navbar.module.css";
 import RightNavbar from "./rightNavbar/RightNavbar";
 import BottomNavbar from "./bottomNavbar/BottomNavbar";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { HiOutlineMagnifyingGlass, HiXMark } from "react-icons/hi2";
+import {
+    HiArrowRight,
+    HiOutlineMagnifyingGlass,
+    HiXMark,
+} from "react-icons/hi2";
 import NavLinks from "../navLinks/NavLinks";
 import { useRef } from "react";
+import ToolTip from "../tooltip/ToolTip";
+import { ProductsContext } from "../../context/ProductsContext";
+import ShegeftProduct from "../shegeftProduct/ShegeftProduct";
 
-function Navbar(params) {
+function Navbar(props) {
+    const { products, loading, error } = useContext(ProductsContext);
+    const [searchedProducts, setSearchedProducts] = useState([]);
+
     const shopCartRef = useRef(null);
     const searchInputRef = useRef(null);
     const modalSearchRef = useRef(null);
-    const [searchParams] = useSearchParams();
+    const [searchparams] = useSearchParams();
+    const [isSearchFocused, setIsSearchFocused] = useState(false);
+    const [searchValue, setSearchValue] = useState("");
+    const [searchHistory, setSearchHistory] = useState([]);
     const navigate = useNavigate();
 
-    const [isInputWide, setIsWide] = useState(window.innerWidth < 521);
+    const [isInputWide, setIsWide] = useState(
+        window.innerWidth < 521 ||
+            (711 < window.innerWidth && window.innerWidth < 875)
+    );
+
+    useEffect(() => {
+        const stored = JSON.parse(localStorage.getItem("search_history")) || [];
+        setSearchHistory(stored);
+    }, []);
 
     useEffect(() => {
         const handleResize = () => {
-            setIsWide(window.innerWidth < 521);
+            console.log(711 < window.innerWidth && window.innerWidth < 875);
+
+            setIsWide(
+                window.innerWidth < 521 ||
+                    (711 < window.innerWidth && window.innerWidth < 875)
+            );
         };
         window.addEventListener("resize", handleResize);
 
@@ -27,16 +53,60 @@ function Navbar(params) {
         };
     }, []);
 
-    const handleSearch = () => {
-        if (searchInputRef.current.value.trim() === "") return;
-        // کپی از searchParams فعلی
-        const url = new URLSearchParams(searchParams);
-        // سرچ جدید رو ست کن
-        url.set("search", searchInputRef.current.value.trim());
-        console.log(url.toString());
+    const saveSearchHistory = (value) => {
+        if (!value) return;
 
-        // ناوبری با query جدید
+        let history = JSON.parse(localStorage.getItem("search_history")) || [];
+
+        history = history.filter((item) => item !== value);
+        history.unshift(value);
+
+        history = history.slice(0, 10);
+
+        localStorage.setItem("search_history", JSON.stringify(history));
+        setSearchHistory(history);
+    };
+    const handleSearch = () => {
+        if (searchValue.trim() === "") return;
+
+        saveSearchHistory(searchValue.trim());
+
+        const url = new URLSearchParams(searchparams);
+        url.set("search", searchValue.trim());
         navigate(`/products?${url.toString()}`);
+    };
+    const handleHistoryClick = (value) => {
+        setSearchValue(value);
+        saveSearchHistory(value);
+
+        const url = new URLSearchParams(searchparams);
+        url.set("search", value);
+        navigate(`/products?${url.toString()}`);
+    };
+
+    const handleShowSearchResults = (e) => {
+        if (!products) return;
+
+        if (e.target.value === "") {
+            setSearchedProducts([]);
+            return;
+        }
+        // console.log(searchInputRef.current.value);
+        setSearchedProducts(
+            products
+                .filter((product) => {
+                    return (
+                        product.name.includes(e.target.value.trim()) ||
+                        product.description.includes(e.target.value.trim())
+                    );
+                })
+                .slice(0, 4)
+        );
+    };
+
+    const handleProductClickFromSearch = () => {
+        if (searchValue.trim() === "") return;
+        saveSearchHistory(searchValue.trim());
     };
 
     const handleKeyDown = (e) => {
@@ -45,44 +115,59 @@ function Navbar(params) {
         }
     };
 
-    if (!params.isWide) {
-        shopCartRef.current?.classList.remove(styled.show_shopCart);
-    }
+    useEffect(() => {
+        if (props.isWide) {
+            shopCartRef.current?.classList.remove(styled.show_shopCart);
+            modalSearchRef.current?.classList.remove(styled.show_modal);
+            document.body.style.overflow = "true";
+            searchInputRef.current.value = "";
+            setSearchedProducts([]);
+        }
+
+        if (
+            isInputWide &&
+            modalSearchRef?.current?.classList?.contains(styled.show_modal)
+        ) {
+            modalSearchRef.current?.classList.remove(styled.show_modal);
+        }
+    }, [props.isWide, isInputWide]);
 
     const handleShowModalSearch = () => {
         modalSearchRef.current?.classList.add(styled.show_modal);
+        document.body.style.overflow = "hidden";
     };
     const closeModalSearch = () => {
         modalSearchRef.current?.classList.remove(styled.show_modal);
+        document.body.style.overflow = "auto";
+        setSearchValue("");
+        setSearchedProducts([]);
     };
-
-    if (
-        isInputWide &&
-        modalSearchRef?.current?.classList?.contains(styled.show_modal)
-    ) {
-        modalSearchRef?.current.classList?.remove(styled.show_modal);
-    }
 
     return (
         <>
             {isInputWide && (
                 <div className={styled.modal} ref={modalSearchRef}>
-                    <i>
-                        <HiXMark
-                            onClick={closeModalSearch}
-                            className={styled.close_mark}
-                            color="#fff"
-                            size={40}
-                        />
-                    </i>
+                    <div className="column">
+                        <i>
+                            <HiArrowRight
+                                onClick={closeModalSearch}
+                                className={styled.close_mark}
+                                color="var(--primary-text-color)"
+                                size={40}
+                            />
+                        </i>
+                    </div>
                     <div className={styled.modal_search}>
                         <input
                             ref={searchInputRef}
+                            value={searchValue}
+                            onChange={(e) => {
+                                setSearchValue(e.target.value);
+                                handleShowSearchResults(e);
+                            }}
                             placeholder="جستجو در محصولات"
                             type="text"
-                            name="search"
                             onKeyDown={handleKeyDown}
-                            id="search"
                         />
                         <HiOutlineMagnifyingGlass
                             color="var(--primary-color)"
@@ -91,6 +176,41 @@ function Navbar(params) {
                             onClick={handleSearch}
                         />
                     </div>
+                    {searchValue.trim() !== "" ? (
+                        <div className={styled.search_results}>
+                            {searchedProducts.length !== 0
+                                ? searchedProducts.map((product) => (
+                                      <ShegeftProduct
+                                          row={true}
+                                          id={product.id}
+                                          title={product.name}
+                                          image={product.images[0]}
+                                          newprice={product.takhfifprice}
+                                          preprice={product.price}
+                                          stock={product.stock}
+                                          onClick={handleProductClickFromSearch}
+                                      />
+                                  ))
+                                : "محصولی یافت نشد."}
+                        </div>
+                    ) : (
+                        <div className={styled.search_history}>
+                            {searchHistory.length !== 0 ? (
+                                searchHistory.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className={styled.history_item}
+                                        onClick={() => handleHistoryClick(item)}
+                                    >
+                                        <HiOutlineMagnifyingGlass size={16} />
+                                        <span>{item}</span>
+                                    </div>
+                                ))
+                            ) : (
+                                <span>جستجویی ثبت نشده</span>
+                            )}
+                        </div>
+                    )}
                 </div>
             )}
             <div className={styled.nav}>
@@ -109,11 +229,21 @@ function Navbar(params) {
                                 {!isInputWide && (
                                     <input
                                         ref={searchInputRef}
+                                        value={searchValue}
+                                        onChange={(e) => {
+                                            setSearchValue(e.target.value);
+                                            handleShowSearchResults(e);
+                                        }}
+                                        onFocus={() => setIsSearchFocused(true)}
+                                        onBlur={() => {
+                                            setTimeout(
+                                                () => setIsSearchFocused(false),
+                                                150
+                                            );
+                                        }}
                                         placeholder="جستجو در محصولات"
                                         type="text"
-                                        name="search"
                                         onKeyDown={handleKeyDown}
-                                        id="search"
                                     />
                                 )}
                                 <HiOutlineMagnifyingGlass
@@ -126,17 +256,78 @@ function Navbar(params) {
                                             : handleSearch
                                     }
                                 />
+                                {!isInputWide &&
+                                    isSearchFocused &&
+                                    (searchValue.trim() !== "" ? (
+                                        <div
+                                            className={`${styled.search_results} ${styled.absolute_results}`}
+                                        >
+                                            {searchedProducts.length !== 0
+                                                ? searchedProducts.map(
+                                                      (product) => (
+                                                          <ShegeftProduct
+                                                              row={true}
+                                                              id={product.id}
+                                                              title={
+                                                                  product.name
+                                                              }
+                                                              image={
+                                                                  product
+                                                                      .images[0]
+                                                              }
+                                                              newprice={
+                                                                  product.takhfifprice
+                                                              }
+                                                              preprice={
+                                                                  product.price
+                                                              }
+                                                              stock={
+                                                                  product.stock
+                                                              }
+                                                          />
+                                                      )
+                                                  )
+                                                : "محصولی یافت نشد."}
+                                        </div>
+                                    ) : (
+                                        <div
+                                            className={`${styled.search_results} ${styled.absolute_results}`}
+                                        >
+                                            {searchHistory.length !== 0 ? (
+                                                searchHistory.map(
+                                                    (item, index) => (
+                                                        <div
+                                                            key={index}
+                                                            className={
+                                                                styled.history_item
+                                                            }
+                                                            onClick={() =>
+                                                                handleHistoryClick(
+                                                                    item
+                                                                )
+                                                            }
+                                                        >
+                                                            <HiOutlineMagnifyingGlass
+                                                                size={16}
+                                                            />
+                                                            <span>{item}</span>
+                                                        </div>
+                                                    )
+                                                )
+                                            ) : (
+                                                <span>جستجویی ثبت نشده</span>
+                                            )}
+                                        </div>
+                                    ))}
                             </div>
                         </div>
-                        {params.isWide && (
-                            <NavLinks shopCartRef={shopCartRef} />
-                        )}
+                        {props.isWide && <NavLinks shopCartRef={shopCartRef} />}
                     </div>
 
-                    {params.isWide && <RightNavbar />}
+                    {props.isWide && <RightNavbar />}
                 </div>
             </div>
-            {!params.isWide && <BottomNavbar />}
+            {!props.isWide && <BottomNavbar />}
         </>
     );
 }

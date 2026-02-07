@@ -22,6 +22,51 @@ function LoopNavar() {
                 <span className={styled.dot}>✦</span>
                 <span>بهترین خرید</span>
                 <span className={styled.dot}>✦</span>
+
+                <span>بهترین کیفیت</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین قیمت</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین انتخاب</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین خرید</span>
+                <span className={styled.dot}>✦</span>
+
+                <span>بهترین کیفیت</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین قیمت</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین انتخاب</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین خرید</span>
+                <span className={styled.dot}>✦</span>
+
+                <span>بهترین کیفیت</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین قیمت</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین انتخاب</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین خرید</span>
+                <span className={styled.dot}>✦</span>
+
+                <span>بهترین کیفیت</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین قیمت</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین انتخاب</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین خرید</span>
+                <span className={styled.dot}>✦</span>
+
+                <span>بهترین کیفیت</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین قیمت</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین انتخاب</span>
+                <span className={styled.dot}>✦</span>
+                <span>بهترین خرید</span>
+                <span className={styled.dot}>✦</span>
             </div>
         </div>
     );

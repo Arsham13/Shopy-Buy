@@ -1,0 +1,90 @@
+.counter_wrapper {
+    /* position: relative; */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 3px;
+}
+.counter_wrapper button {
+    width: 35px;
+    height: 47px;
+    background-color: var(--placeholder-color);
+    color: var(--primary-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--primary-lightest-text-color);
+    transition: 0.2s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    cursor: pointer;
+}
+.counter_wrapper button:active {
+    outline-color: var(--placeholder-color);
+    outline-offset: 1px;
+    transition-duration: 20ms;
+}
+.counter_wrapper button:hover {
+    background-color: var(--primary-lightest-color);
+    border: 1px solid var(--primary-lighter-text-color);
+}
+.counter_wrapper button.plus_counter {
+    border-radius: 0 14px 14px 0;
+}
+.counter_wrapper button.minus_counter {
+    border-radius: 14px 0 0 14px;
+}
+
+.counter_wrapper .counter_number {
+    width: 55px;
+    height: 47px;
+    border: 1px solid var(--primary-lightest-text-color);
+    background-color: #fff;
+    border-right: 0;
+    border-left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    z-index: 2;
+    user-select: none;
+}
+
+.add_to_cart {
+    width: fit-content;
+    display: flex;
+    padding: 13px 15px;
+    font-weight: bold;
+    color: var(--primary-text-color);
+    font-size: 15px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: inset 0 0 0 2px var(--primary-text-color);
+    background-color: #fff;
+    transition: 0.3s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    cursor: pointer;
+}
+.add_to_cart:hover {
+    color: #fff;
+    box-shadow: inset 0 0 20px 1.8em var(--primary-text-color);
+}
+.add_to_cart p {
+    transition: 0.3s transform cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+.add_to_cart:hover p {
+    transform: scale(1.03);
+}
+.add_to_cart:active p {
+    transform: scale(1.07);
+    transition-duration: 90ms;
+}
+.btn_disabled {
+    box-shadow: inset 0 0 0 2px var(--primary-text-color) !important;
+    color: inherit !important;
+}
+.btn_disabled p{
+    transform: inherit !important;
+}
+.icon {
+    height: fit-content;
+}

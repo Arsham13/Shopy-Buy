@@ -22,18 +22,23 @@ function ProductSwiper() {
     console.log(products);
 
     return (
+        <>
+
         <Swiper
             slidesPerView={1}
-            spaceBetween={10}
+            spaceBetween={7}
             breakpoints={{
-                0: { slidesPerView: 1.5 },
-                420: { slidesPerView: 1.5 },
-                630: { slidesPerView: 2.5 },
-                868: { slidesPerView: 3.5 },
-                1092: { slidesPerView: 4.5 },
-                1400: { slidesPerView: 5.5 },
+                0: { slidesPerView: 1.4 },
+                500: { slidesPerView: 1.8 },
+                550: { slidesPerView: 2.2 },
+                650: { slidesPerView: 2.7 },
+                800: { slidesPerView: 3.2 },
+                850: { slidesPerView: 3.8 },
+                1100: { slidesPerView: 4.5 },
+                1500: { slidesPerView: 5.5 },
             }}
         >
+
             <SwiperSlide>
                 <div className="column shegeft">
                     <p className="shegeftP">پیشنهاد</p>
@@ -43,21 +48,24 @@ function ProductSwiper() {
                     <Link to={"/products"}>
                         مشاهده همه{" "}
                         <i className="arrow">
-                            <HiMiniChevronLeft size={25} />
+                            <HiMiniChevronLeft size={23} />
                         </i>
                     </Link>
                 </div>
             </SwiperSlide>
 
             {products
-                .filter(
-                    (product) =>
+                .filter((product) => {
+                    if (product.takhfifprice === 0) return false;
+
+                    return (
                         Math.round(
                             ((product.price - product.takhfifprice) /
                                 product.price) *
                                 100
                         ) >= 20
-                )
+                    );
+                })
                 .map((product) => (
                     <SwiperSlide key={product.id}>
                         <ShegeftProduct
@@ -66,10 +74,12 @@ function ProductSwiper() {
                             image={product.images[0]}
                             newprice={product.takhfifprice}
                             preprice={product.price}
+                            stock={product.stock}
                         />
                     </SwiperSlide>
                 ))}
         </Swiper>
+        </>
     );
 }
 

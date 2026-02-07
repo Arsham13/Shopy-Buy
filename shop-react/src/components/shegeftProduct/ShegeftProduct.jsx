@@ -4,39 +4,28 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import ProductCounter from "../productCounter/ProductCounter";
+import Prices from "../prices/Prices";
+import "../../index.css"
 
 function ShegeftProduct(params) {
     console.log(params.title);
-    let takhfif = Math.round(
-        ((params.preprice - params.newprice) / params.preprice) * 100
-    );
-    const takhfif_fa = `${takhfif.toLocaleString("fa", takhfif)}`;
-    const newprice = parseInt(params.newprice).toLocaleString(
-        "fa",
-        params.newprice
-    );
-    const preprice = parseInt(params.preprice).toLocaleString(
-        "fa",
-        params.preprice
-    );
 
     return (
-        <Link className={styled.products} to={`/products/${params.id}`}>
+        <Link className={styled.products} to={`/products/${params.id}`} onClick={params.onClick}>
             <div
                 className={styled.shegeft_wrapper}
                 style={params.row ? { width: "90%" } : {}}
             >
-                {takhfif >= 20 && !params.row && (
-                    <div className={styled.shegeft_baner}>شگفت انگیز</div>
-                )}
-
                 <div
-                    className={`${styled.shegeft_product} ${
-                        params.row ? styled.row : ""
-                    }`}
-                    style={params.row ? { padding: "10px 20px" } : {}}
+                    className={styled.shegeft_product}
+                    style={params.row ? { padding: "20px 15px" } : {}}
                 >
-                    <div className={styled.shegeft_titles}>
+                    <div
+                        className={`${styled.shegeft_titles} ${
+                            params.row ? styled.row : ""
+                        }`}
+                    >
                         <img
                             className={styled.product_image}
                             // src="https://dkstatics-public.digikala.com/digikala-products/9f78e4251c97e94203c56cecc03545a7d2470bda_1751893583.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/format,webp/quality,q_80"
@@ -44,49 +33,52 @@ function ShegeftProduct(params) {
                             style={params.row ? { width: "100px" } : {}}
                             alt={params.title}
                         />
-                    </div>
-                    <div
-                        className={styled.shegeft_pricesTakhfif}
-                        style={{ width: params.width + "%" }}
-                    >
                         <div
-                            className={styled.product_title}
-                            title={params.title}
+                            className={styled.shegeft_pricesTakhfif}
+                            style={{ width: params.width + "%" }}
                         >
-                            <p>{params.title}</p>
-                        </div>
-                        {!params.texts && (
-                            <div className={styled.texts}>
-                                <div className={styled.takhfif_num}>
-                                    {takhfif_fa !== "ناعدد" &&
-                                        params.preprice && <p>{takhfif_fa}%</p>}
-                                </div>
-                                <div className={styled.shegeft_prices}>
-                                    <div className={styled.product_price}>
-                                        <b>
-                                            {newprice !== "ناعدد"
-                                                ? newprice
-                                                : preprice}
-                                        </b>
-                                        <span className={styled.toman}>تو</span>
-                                    </div>
-                                    <div className={styled.product_preprice}>
-                                        <b>
-                                            {(() => {
-                                                if (newprice === "ناعدد") {
-                                                    return "";
-                                                } else if (
-                                                    preprice !== "ناعدد"
-                                                ) {
-                                                    return preprice
-                                                }
-                                            })()}
-                                        </b>
-                                    </div>
-                                </div>
+                            <div
+                                className={styled.product_title}
+                                title={params.title}
+                            >
+                                <p>{params.title}</p>
                             </div>
-                        )}
+                        </div>
                     </div>
+
+                    {!params.texts && (
+                        <div className={styled.texts} style={{marginBottom: params.row ? "0" : "17px"}}>
+                            <div className={styled.stock_div}>
+                                {(params.stock > 5 && <h6>‏</h6>) ||
+                                    (params.stock && params.stock <= 5 && (
+                                        <h6>
+                                            تنها{" "}
+                                            {parseInt(
+                                                params.stock
+                                            ).toLocaleString(
+                                                "fa",
+                                                params.stock
+                                            )}{" "}
+                                            عدد در انبار باقی مانده
+                                        </h6>
+                                    )) ||
+                                    (params.stock === 0 && <h3>ناموجود</h3>)}
+                            </div>
+                            {/* sdffgdfdf اینجا بود!!!!!!! */}{" "}
+                            <Prices
+                                newprice={params.newprice}
+                                preprice={params.preprice}
+                                stock={params.stock}
+                            />
+                        </div>
+                    )}
+                    {params.counter && (
+                        <ProductCounter
+                            product={{
+                                id: params.id,
+                            }}
+                        />
+                    )}
                 </div>
             </div>
         </Link>

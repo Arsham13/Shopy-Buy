@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { ProductsProvider } from "./context/ProductsContext";
+import { CartProvider } from "./context/CartContext";
 
 let text = "طراحی و توسعه توسط آرشام سراجی";
 let i = 0;
@@ -49,9 +50,11 @@ let isDeleting = false;
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <ProductsProvider>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
+            <CartProvider>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </CartProvider>
         </ProductsProvider>
     </StrictMode>
 );

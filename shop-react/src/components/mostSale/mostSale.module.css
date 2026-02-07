@@ -1,28 +1,40 @@
 /* mostSale.module.css */
-.most_wrapper{
+.most_wrapper {
     margin-bottom: 50px;
 }
 .mostSale {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* دو تا کنار هم */
+    grid-template-columns: repeat(3, 1fr); /* دو تا کنار هم */
     margin-top: 20px;
-    column-gap: 40px;
+    column-gap: 10px;
+    row-gap: 5px;
     padding: 0 20px;
-}
-
-@media (max-width: 640px) {
-    .mostSale {
-        grid-template-columns: 1fr; /* تو عرض کم همه زیر هم */
-    }
 }
 
 .most_products {
     display: flex;
+    flex-direction: column;
     background-color: #fff;
     border-radius: 10px;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+}
+@media (max-width: 700px) {
+    .mostSale {
+        grid-template-columns: repeat(2, 1fr); /* تو عرض کم همه زیر هم */
+    }
+}
+@media (max-width: 500px) {
+    .mostSale {
+        grid-template-columns: 1fr; /* تو عرض کم همه زیر هم */
+    }
+}
+@media (max-width: 440px) {
+    .most_products {
+        flex-direction: column;
+        gap: 0px;
+        align-items: start;
+    }
 }
 
 .rates {

@@ -2,11 +2,19 @@ import React, { useContext, useState } from "react";
 import styled from "./productsPage.module.css";
 import { ProductsContext } from "../../context/ProductsContext";
 import ShegeftProduct from "../shegeftProduct/ShegeftProduct";
-import { HiKey, HiMiniChevronDown, HiXMark } from "react-icons/hi2";
+import {
+    HiMiniChevronDown,
+    HiMiniXMark,
+    HiOutlineAdjustmentsHorizontal,
+    HiOutlineFunnel,
+    HiOutlineSquares2X2,
+    HiXMark,
+} from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { useRef } from "react";
+import Breadcrumb from "../breadcrumb/Breadcrumb";
 
 // تبدیل فارسی به انگلیسی
 const toEnglishNumbers = (str) => {
@@ -21,12 +29,13 @@ const normalizeInput = (value) => {
     return onlyNumbers;
 };
 
-function ProductsPage(params) {
+function ProductsPage(props) {
     const { products, loading, error } = useContext(ProductsContext);
     const filtersRef = useRef(null);
 
     const [openIndexes, setOpenIndexes] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
+    const isShegeft = searchParams.get("shegeft") === "1";
 
     const selectedCategories = searchParams.get("category")
         ? searchParams.get("category").split(",")
@@ -49,14 +58,16 @@ function ProductsPage(params) {
     };
 
     const updateParams = (newMin, newMax) => {
-        const paramsObj = {};
+        const ParamsObj = {};
         if (selectedCategories.length > 0)
-            paramsObj.category = selectedCategories.join(",");
-        if (newMin !== undefined) paramsObj.min = newMin;
-        if (newMax !== undefined) paramsObj.max = newMax;
-        if (searchQuery) paramsObj.search = searchQuery;
+            ParamsObj.category = selectedCategories.join(",");
+        if (newMin !== undefined) ParamsObj.min = newMin;
+        if (newMax !== undefined) ParamsObj.max = newMax;
+        if (searchQuery) ParamsObj.search = searchQuery;
 
-        setSearchParams(paramsObj);
+        if (isShegeft) ParamsObj.shegeft = "1";
+
+        setSearchParams(ParamsObj);
     };
 
     const handleCategoryChange = (category) => {
@@ -64,14 +75,17 @@ function ProductsPage(params) {
             ? selectedCategories.filter((c) => c !== category)
             : [...selectedCategories, category];
 
-        const paramsObj = {};
+        const ParamsObj = {};
         if (updatedCategories.length > 0)
-            paramsObj.category = updatedCategories.join(",");
-        if (minPrice) paramsObj.min = minPrice;
-        if (maxPrice) paramsObj.max = maxPrice;
-        if (searchQuery) paramsObj.search = searchQuery;
+            ParamsObj.category = updatedCategories.join(",");
+        if (minPrice) ParamsObj.min = minPrice;
+        if (maxPrice) ParamsObj.max = maxPrice;
+        if (searchQuery) ParamsObj.search = searchQuery;
 
-        setSearchParams(paramsObj);
+        if (isShegeft) ParamsObj.shegeft = "1";
+
+        setSearchParams(ParamsObj);
+        window.scrollTo(0, 0);
     };
 
     // هندلر ورودی مینیمم
@@ -94,28 +108,58 @@ function ProductsPage(params) {
         updateParams(minPrice, Number(raw));
     };
 
+    const handleShegeftToggle = () => {
+        const ParamsObj = {};
+
+        if (selectedCategories.length > 0)
+            ParamsObj.category = selectedCategories.join(",");
+
+        if (minPrice !== 0) ParamsObj.min = minPrice;
+        if (maxPrice !== 50000000) ParamsObj.max = maxPrice;
+
+        if (searchQuery) ParamsObj.search = searchQuery;
+
+        if (!isShegeft) ParamsObj.shegeft = "1";
+
+        setSearchParams(ParamsObj);
+        window.scrollTo(0, 0);
+    };
+
     const clearAllFilters = () => {
         setSearchParams({});
+        window.scrollTo(0, 0);
 
-        if (params.isShowFilters) {
+        if (props.isShowFilters) {
             closeFilters();
         }
     };
 
-    const filteredProducts = products.filter((p) => {
+    const filteredProducts = products.filter((product) => {
         const inCategory =
             selectedCategories.length > 0
-                ? selectedCategories.includes(p.category)
+                ? selectedCategories.includes(product.category)
                 : true;
 
         const inPrice =
-            p.takhfifprice >= minPrice && p.takhfifprice <= maxPrice;
+            product.takhfifprice >= minPrice &&
+            product.takhfifprice <= maxPrice;
 
         const inSearch = searchQuery
-            ? p.name.includes(searchQuery.trim())
+            ? product.name.includes(searchQuery.trim())
             : true;
 
-        return inCategory && inPrice && inSearch;
+        const discountPercent = product.price
+            ? Math.round(
+                  ((product.price - product.takhfifprice) / product.price) * 100
+              )
+            : 0;
+
+        console.log(product);
+
+        const inShegeft = isShegeft
+            ? discountPercent >= 70 && discountPercent < 100
+            : true;
+        return inCategory && inPrice && inSearch && inShegeft;
     });
 
     const showFilters = () => {
@@ -131,6 +175,7 @@ function ProductsPage(params) {
 
     return (
         <>
+            <Breadcrumb />
             <div className={styled.titles}>
                 <h2 className={styled.searchQuery}>محصولات</h2>
                 {searchQuery ? (
@@ -143,7 +188,7 @@ function ProductsPage(params) {
             </div>
 
             <div className={styled.products_wrapper}>
-                {params.isShowFilters && (
+                {props.isShowFilters && (
                     <div onClick={showFilters} className={styled.showFilters}>
                         <h3>اعمال فیلتر</h3>
                     </div>
@@ -152,12 +197,15 @@ function ProductsPage(params) {
                 <section
                     ref={filtersRef}
                     className={`${styled.filters} ${
-                        !params.isShowFilters && styled.show && ""
+                        !props.isShowFilters && styled.show && ""
                     }`}
                 >
                     <div className={styled.closes}>
-                        <h3>فیلتر ها</h3>
-                        {params.isShowFilters && (
+                        <h3 className="row align_center gap_5">
+                            <HiOutlineFunnel size={25} />
+                            فیلتر ها
+                        </h3>
+                        {props.isShowFilters && (
                             <i>
                                 <HiXMark
                                     onClick={closeFilters}
@@ -168,13 +216,30 @@ function ProductsPage(params) {
                             </i>
                         )}
                     </div>
+                    {selectedCategories.length > 0 && (
+                        <div className={styled.active_filters}>
+                            {selectedCategories.map((cat) => (
+                                <span
+                                    key={cat}
+                                    className={`${styled.active_filter} row gap_5 align_center`}
+                                    onClick={() => handleCategoryChange(cat)}
+                                >
+                                    <HiMiniXMark size={20} />
+                                    {cat}
+                                </span>
+                            ))}
+                        </div>
+                    )}
 
                     {/* دسته بندی */}
                     <div
                         className={styled.details}
                         onClick={() => handleClickDetails(0)}
                     >
-                        <p>دسته بندی</p>
+                        <div className="row align_center gap_5">
+                            <HiOutlineSquares2X2 size={20} />
+                            <p>دسته بندی</p>
+                        </div>
                         <i
                             className={
                                 openIndexes.includes(0) ? styled.rotate : ""
@@ -217,7 +282,10 @@ function ProductsPage(params) {
                         className={styled.details}
                         onClick={() => handleClickDetails(1)}
                     >
-                        <p>قیمت</p>
+                        <div className="row align_center gap_5">
+                            <HiOutlineAdjustmentsHorizontal size={20} />
+                            <p>قیمت</p>
+                        </div>
                         <i
                             className={
                                 openIndexes.includes(1) ? styled.rotate : ""
@@ -238,7 +306,7 @@ function ProductsPage(params) {
                             <Slider
                                 range
                                 min={0}
-                                step={50000}
+                                step={100000}
                                 max={50000000}
                                 value={[minPrice, maxPrice]}
                                 onChange={([min, max]) =>
@@ -248,37 +316,57 @@ function ProductsPage(params) {
                             />
 
                             <div className={styled.prices}>
-                                <span>از</span>
-                                <input
-                                    type="text"
-                                    value={minPrice.toLocaleString("fa")}
-                                    onChange={handleMinPriceChange}
-                                    dir="ltr"
-                                />
-                                <span>تا</span>
-                                <input
-                                    type="text"
-                                    value={maxPrice.toLocaleString("fa")}
-                                    onChange={handleMaxPriceChange}
-                                    dir="ltr"
-                                />
+                                <div className={styled.fromto_price}>
+                                    {" "}
+                                    <span>از</span>
+                                    <input
+                                        type="text"
+                                        value={minPrice.toLocaleString("fa")}
+                                        onChange={handleMinPriceChange}
+                                        dir="ltr"
+                                    />
+                                </div>
+                                <div className={styled.fromto_price}>
+                                    {" "}
+                                    <span>تا</span>
+                                    <input
+                                        type="text"
+                                        value={maxPrice.toLocaleString("fa")}
+                                        onChange={handleMaxPriceChange}
+                                        dir="ltr"
+                                    />
+                                </div>
                                 <span className={styled.toman}>تومان</span>
                             </div>
                         </div>
+                    </div>
+
+                    <div className={styled.toggle_filters}>
+                        <label className={`switch ${styled.shegefts_filter}`}>
+                            <h5>شگفت انگیزها</h5>
+                            <input
+                                type="checkbox"
+                                checked={isShegeft}
+                                onChange={handleShegeftToggle}
+                            />
+                            <span className="slider"></span>
+                        </label>
                     </div>
 
                     <div
                         className={`${styled.clear_all_btn} ${
                             selectedCategories.length === 0 &&
                             minPrice === 0 &&
-                            maxPrice === 50000000
-                                ? styled.btn_disabled
+                            maxPrice === 50000000 &&
+                            !isShegeft
+                                ? "btn_disabled"
                                 : ""
                         }`}
                         onClick={
                             selectedCategories.length !== 0 ||
                             minPrice !== 0 ||
-                            maxPrice !== 50000000
+                            maxPrice !== 50000000 ||
+                            isShegeft
                                 ? clearAllFilters
                                 : () => {}
                         }
@@ -287,27 +375,36 @@ function ProductsPage(params) {
                     </div>
                 </section>
 
-                {params.isShowFilters && (
+                {props.isShowFilters && (
                     <div className={styled.modal} onClick={closeFilters}></div>
                 )}
 
                 <section className={styled.products}>
-                    {filteredProducts.map((product) => (
-                        <div key={product.id} className={styled.product}>
-                            <ShegeftProduct
-                                row={params.isRow}
-                                width={75}
-                                id={product.id}
-                                title={product.name}
-                                image={product.images[0]}
-                                newprice={product.takhfifprice}
-                                preprice={product.price}
-                            />
-                        </div>
-                    ))}
-                    {filteredProducts.length === 0 && (
-                        <p>هیچ محصولی یافت نشد</p>
-                    )}
+                    <div className={styled.dropdown_filter}></div>
+                    <div className={styled.product_container}>
+                        {filteredProducts.map((product) => {
+                            console.log(product);
+                            return (
+                                <div
+                                    key={product.id}
+                                    className={styled.product}
+                                >
+                                    <ShegeftProduct
+                                        row={props.isRow}
+                                        id={product.id}
+                                        title={product.name}
+                                        image={product.images[0]}
+                                        newprice={product.takhfifprice}
+                                        preprice={product.price}
+                                        stock={product.stock}
+                                    />
+                                </div>
+                            );
+                        })}
+                        {filteredProducts.length === 0 && (
+                            <p>هیچ محصولی یافت نشد</p>
+                        )}
+                    </div>
                 </section>
             </div>
         </>
